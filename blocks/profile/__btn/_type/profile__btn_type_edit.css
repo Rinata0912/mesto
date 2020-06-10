@@ -1,0 +1,12 @@
+.profile__btn_type_edit {
+  border: 1px solid #fff;
+  box-sizing: border-box;
+  padding: 7px;
+}
+
+.profile__btn_type_edit:hover {
+  opacity: .2;
+}
+
+
+

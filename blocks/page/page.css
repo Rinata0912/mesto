@@ -1,5 +1,6 @@
 .page {
-  width: 882px;
+  max-width: 882px;
   padding: 45px 0 60px;
   margin: 0 auto;
+  font-family: 'Inter', Arial, sans-serif;
 }
