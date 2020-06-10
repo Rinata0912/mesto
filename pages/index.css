@@ -1,0 +1,12 @@
+@import url(../vendor/normalize.css);
+@import url(../blocks/page/page.css);
+@import url(../blocks/header/header.css);
+@import url(../blocks/logo/logo.css);
+
+body {
+  background-color: #000;
+}
+
+* {
+  outline: 1px solid red;
+}
