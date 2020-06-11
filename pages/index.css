@@ -8,6 +8,7 @@
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/cards-gallery/cards-gallery.css);
 @import url(../blocks/card/card.css);
+@import url(../blocks/footer/footer.css);
 
 body {
   background-color: #000;
