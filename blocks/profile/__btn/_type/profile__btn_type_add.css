@@ -3,4 +3,9 @@
   border: 2px solid #fff;
   padding: 14px 64px;
   box-sizing: border-box;
+  border-radius: 2px;
+}
+
+.profile__btn_type_add:hover {
+  opacity: .6;
 }

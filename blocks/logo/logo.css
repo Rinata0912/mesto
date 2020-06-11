@@ -1,3 +1,5 @@
+@import url(./__img/logo__img.css);
+
 .logo {
-  display: block;
+  display: inline-block;
 }
