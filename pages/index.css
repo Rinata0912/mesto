@@ -9,6 +9,9 @@
 @import url(../blocks/cards-gallery/cards-gallery.css);
 @import url(../blocks/card/card.css);
 @import url(../blocks/footer/footer.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/form/form.css);
 
 body {
   background-color: #000;

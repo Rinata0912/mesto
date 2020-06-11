@@ -1,0 +1,10 @@
+.form__submit-btn {
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  padding: 13px 124px;
+  border-radius: 2px;
+}
