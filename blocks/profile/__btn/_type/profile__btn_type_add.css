@@ -4,6 +4,7 @@
   padding: 14px 64px;
   box-sizing: border-box;
   border-radius: 2px;
+  transition: opacity .3s ease;
 }
 
 .profile__btn_type_add:hover {

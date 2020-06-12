@@ -2,6 +2,7 @@
   border: 1px solid #fff;
   box-sizing: border-box;
   padding: 7px;
+  transition: opacity .3s ease;
 }
 
 .profile__btn_type_edit:hover {

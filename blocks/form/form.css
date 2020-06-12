@@ -2,7 +2,7 @@
 @import url(./__item/form__item.css);
 @import url(./__submit-btn/form__submit-btn.css);
 @import url(./__title/form__title.css);
-@import url(./__item/_el/form__item_el_description.css);
+@import url(./__item/_el/form__item_el_job.css);
 @import url(./__item/_el/form__item_el_name.css);
 
 .form {
