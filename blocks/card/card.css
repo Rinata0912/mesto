@@ -2,7 +2,7 @@
 @import url(./__content/card__content.css);
 @import url(./__title/card__title.css);
 @import url(./__btn/card__btn.css);
-@import url(./__btn-img/card__btn-img.css);
+@import url(./__btn-icon/card__btn-icon.css);
 
 .card {
   max-width: 282px;

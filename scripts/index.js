@@ -11,11 +11,8 @@ const profileEditButton = profileInfo.querySelector('.profile__btn_type_edit');
 function formSubmitHandler (evt) {
   evt.preventDefault();
 
-  const name = nameInput.value;
-  const job = jobInput.value;
-
-  profileName.textContent = name;
-  profileJob.textContent = job;
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
 
   closePopup();
 }

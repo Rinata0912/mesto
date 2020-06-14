@@ -10,3 +10,11 @@
 .profile__btn_type_add:hover {
   opacity: .6;
 }
+
+@media screen and (max-width: 767px) {
+  .profile__btn_type_add {
+    padding: 17px 0;
+    max-width: 282px;
+    width: 100%;
+  }
+}

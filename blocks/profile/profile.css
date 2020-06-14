@@ -15,3 +15,11 @@
   justify-content: space-between;
   margin-bottom: 50px;
 }
+
+@media screen and (max-width: 767px) {
+  .profile {
+    display: block;
+    margin-bottom: 36px;
+    text-align: center;
+  }
+}

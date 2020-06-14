@@ -3,3 +3,17 @@
   grid-template: repeat(2, 1fr)/ repeat(3, 1fr);
   grid-gap: 21px 18px;
 }
+
+@media screen and (max-width: 882px) {
+  .cards-gallery {
+    grid-template: repeat(3, 1fr)/ repeat(2, 1fr);
+    justify-items: center;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .cards-gallery {
+    grid-template: repeat(6, 1fr)/ 1fr;
+    grid-row-gap: 20px;
+  }
+}
