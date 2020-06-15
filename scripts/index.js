@@ -8,15 +8,6 @@ const profileName = profileInfo.querySelector('.profile__name');
 const profileJob = profileInfo.querySelector('.profile__job');
 const profileEditButton = profileInfo.querySelector('.profile__btn_type_edit');
 
-function formSubmitHandler (evt) {
-  evt.preventDefault();
-
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-
-  closePopup();
-}
-
 function closePopup () {
   popup.classList.remove('popup_opened');
 }
@@ -25,6 +16,15 @@ function openPopup () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   popup.classList.add('popup_opened');
+}
+
+function formSubmitHandler (evt) {
+  evt.preventDefault();
+
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+
+  closePopup();
 }
 
 formElement.addEventListener('submit', formSubmitHandler);
