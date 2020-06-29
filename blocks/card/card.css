@@ -5,6 +5,7 @@
 @import url(./__btn-icon/card__btn-icon.css);
 @import url(./__delete-btn/card__delete-btn.css);
 @import url(./__delete-icon/card__delete-icon.css);
+@import url(./__btn-active/card__btn-active.css);
 
 .card {
   max-width: 282px;
@@ -12,4 +13,5 @@
   border-radius: 10px;
   padding-bottom: 31px;
   position: relative;
+  overflow: hidden;
 }

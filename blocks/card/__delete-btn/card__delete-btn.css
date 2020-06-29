@@ -1,6 +1,5 @@
 .card__delete-btn {
   position: absolute;
-  z-index: 1;
   padding: 0;
   border: none;
   font: inherit;

@@ -26,48 +26,7 @@
         <button class="profile__btn profile__btn_type_add" type="button"><img src="./images/button-add_icon.svg" alt="добавить карточку"></button>
       </section>
       <section class="cards-gallery">
-        <article class="card">
-          <img src="./images/card-img_karachaevsk.jpg" alt="Нижне-Архызское городище" class="card__image">
-          <div class="card__content">
-            <p class="card__title">Карачаевск</p>
-            <button class="card__btn"><img  src="./images/card-btn.svg" alt="поставить лайк" class="card__btn-icon"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img src="./images/card-img_elbrus.jpg" alt="гора Эльбрус" class="card__image">
-          <div class="card__content">
-            <p class="card__title">Гора Эльбрус</p>
-            <button class="card__btn" type="button"><img src="./images/card-btn.svg" alt="поставить лайк" class="card__btn-icon"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img src="./images/card-img_dombay.jpg" alt="Домбай, горная местность" class="card__image">
-          <div class="card__content">
-            <p class="card__title">Домбай</p>
-            <button class="card__btn" type="button"><img src="./images/card-btn.svg" alt="поставить лайк" class="card__btn-icon"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img src="./images/card-img_elbrus.jpg" alt="гора Эльбрус" class="card__image">
-          <div class="card__content">
-            <p class="card__title">Гора Эльбрус</p>
-            <button class="card__btn" type="button"><img src="./images/card-btn.svg" alt="поставить лайк" class="card__btn-icon"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img src="./images/card-img_dombay.jpg" alt="Домбай, горная местность" class="card__image">
-          <div class="card__content">
-            <p class="card__title">Домбай</p>
-            <button class="card__btn" type="button"><img src="./images/card-btn.svg" alt="поставить лайк" class="card__btn-icon"></button>
-          </div>
-        </article>
-        <article class="card">
-          <img src="./images/card-img_karachaevsk.jpg" alt="Нижне-Архызское городище" class="card__image">
-          <div class="card__content">
-            <p class="card__title">Карачаево-Черкесия</p>
-            <button class="card__btn" type="button"><img src="./images/card-btn.svg" alt="поставить лайк" class="card__btn-icon"></button>
-          </div>
-        </article>
+
       </section>
     </main>
     <footer class="footer">
@@ -99,14 +58,24 @@
         </form>
       </div>
     </div>
+    <div class="popup-card js-popup-show-card">
+      <div class="popup-card__container">
+        <button class="popup-card__close-btn" type="button"><img src="./images/form_close-icon.svg" alt="закрыть форму" class="popup__close-icon"></button>
+
+      </div>
+    </div>
   </div>
   <template id="card-template">
     <article class="card">
       <button class="card__delete-btn" type="button"><img src="./images/card-delete.svg" alt="удалить место" class="card__delete-icon"></button>
-      <img src="#" alt="" class="card__image">
+      <a href="#"><img src="#" alt="" class="card__image"></a>
       <div class="card__content">
         <p class="card__title"></p>
-        <button class="card__btn"><img  src="./images/card-btn.svg" alt="поставить лайк" class="card__btn-icon"></button>
+        <button class="card__btn">
+          <svg width="21" height="19" viewBox="0 0 21 19"  fill="currentcolor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.8 1.959l.002.001c1.942 1.923 1.944 5.079-.002 7.024l-8.439 8.44-8.414-8.415-.002-.002A5.013 5.013 0 01.5 5.482v-.004a4.93 4.93 0 011.443-3.52h0l.001-.001C3.866.016 7.022.013 8.968 1.977l.001.002 1.038 1.04.358.357.353-.361 1.036-1.058a4.986 4.986 0 017.047.002z" stroke="#000"  />
+          </svg>
+        </button>
       </div>
     </article>
   </template>

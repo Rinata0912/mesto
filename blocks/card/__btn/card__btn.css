@@ -5,4 +5,10 @@
   color: inherit;
   background-color: transparent;
   cursor: pointer;
+  transition: opacity .3s ease;
+  color: #fff;
+}
+
+.card__btn:hover {
+  opacity: .6;
 }
