@@ -38,7 +38,7 @@
         <form class="form" name="editProfileForm">
           <h3 class="form__title">Редактировать профиль</h3>
           <fieldset class="form__input-container">
-            <input class="form__item js-input-name" type="text" placeholder="Имя" name="name">
+            <input class="form__item js-input-name" type="text" placeholder="Имя" name="name" required>
             <input class="form__item js-input-job" type="text" placeholder="О себе" name="job">
           </fieldset>
           <button class="form__submit-btn">Сохранить</button>
@@ -51,8 +51,8 @@
         <form class="form" name="editProfileForm">
           <h3 class="form__title">Новое место</h3>
           <fieldset class="form__input-container">
-            <input class="form__item js-input-place" type="text" placeholder="Название" name="name">
-            <input class="form__item js-input-img" type="text" placeholder="Ссылка на картинку" name="job">
+            <input class="form__item js-input-place" type="text" placeholder="Название" name="name" required>
+            <input class="form__item js-input-img" type="text" placeholder="Ссылка на картинку" name="job" required>
           </fieldset>
           <button class="form__submit-btn">Создать</button>
         </form>
