@@ -1,6 +1,6 @@
 .cards-gallery {
   display: grid;
-  grid-template: repeat(2, 1fr)/ repeat(3, 1fr);
+  grid-template: 1fr / repeat(3, 1fr);
   grid-gap: 21px 18px;
   grid-auto-rows: 361px;
 }

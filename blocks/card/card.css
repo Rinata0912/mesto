@@ -6,6 +6,9 @@
 @import url(./__delete-btn/card__delete-btn.css);
 @import url(./__delete-icon/card__delete-icon.css);
 @import url(./__btn-active/card__btn-active.css);
+@import url(./__show-image/card__show-image.css);
+@import url(./__img-full/card__img-full.css);
+@import url(./__img-caption/card__img-caption.css);
 
 .card {
   max-width: 282px;
