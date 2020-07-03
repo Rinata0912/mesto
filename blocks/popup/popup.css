@@ -2,7 +2,6 @@
 @import url(./__close-btn/popup__close-btn.css);
 @import url(./__close-icon/popup__close-icon.css);
 @import url(./__container/_size/popup__container_size_m.css);
-@import url(./__container/_size/popup__container_size_l.css);
 
 .popup {
   display: flex;
