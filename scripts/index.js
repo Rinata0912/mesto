@@ -60,6 +60,9 @@ function closePopup (popup) {
 }
 
 function openPopup (popup) {
+  if(popup.querySelector('.form')) {
+    setEventListeners(popup.querySelector('.form'));
+  }
   popup.classList.add('popup_opened');
 }
 
@@ -112,6 +115,51 @@ function formAddSubmitHandler (evt) {
   closePopup(popupAdd);
 }
 
+function showInputError (formElement, inputElement, errorMessage) {
+  const errorElement = inputElement.closest('.form__control').querySelector('.form__input-error');
+
+  inputElement.classList.add('form__input_type_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('form__input-error_active');
+}
+
+function hideInputError (formElement, inputElement) {
+  const errorElement = inputElement.closest('.form__control').querySelector('.form__input-error');
+
+  inputElement.classList.remove('form__input_type_error');
+  errorElement.textContent = '';
+  errorElement.classList.remove('form__input-error_active');
+}
+
+function isValid (formElement, inputElement) {
+  if(!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+}
+
+function setEventListeners (formElement) {
+  const inputList = Array.from(formElement.querySelectorAll('.form__input'));
+
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      isValid(formElement, inputElement);
+    });
+  });
+}
+
+function enableValidation () {
+  const formList = Array.from(document.querySelectorAll('.form'));
+
+  formList.forEach((formElement) => {
+    setEventListeners(formElement);
+  });
+}
+
+enableValidation();
+
+
 formElementEdit.addEventListener('submit', formEditSubmitHandler);
 formElementAdd.addEventListener('submit', formAddSubmitHandler);
 popupEditCloseButton.addEventListener('click', () => closePopup(popupEdit));
@@ -123,3 +171,6 @@ profileEditButton.addEventListener('click', () => {
 });
 profileAddButton.addEventListener('click', () => openPopup(popupAdd));
 popupShowCardCloseButton.addEventListener('click', () => closePopup(popupShowCard));
+
+
+

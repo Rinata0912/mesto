@@ -1,9 +1,11 @@
 @import url(./__input-container/form__input-container.css);
-@import url(./__item/form__item.css);
+@import url(./__control/form__control.css);
+@import url(./__input/form__input.css);
 @import url(./__submit-btn/form__submit-btn.css);
 @import url(./__title/form__title.css);
-@import url(./__item/_el/form__item_el_job.css);
-@import url(./__item/_el/form__item_el_name.css);
+@import url(./__input/_type/form__input_type_error.css);
+@import url(./__input-error/form__input-error.css);
+@import url(./__input-error/_active/form__input-error_active.css);
 
 .form {
 
