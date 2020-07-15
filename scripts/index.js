@@ -109,11 +109,9 @@ function addCard (place, img) {
   const cardButton = card.querySelector('.card__btn');
   const cardShowImage = card.querySelector('.card__show-image');
 
-
   cardTitle.textContent = place;
   cardImage.src = img;
   cardImage.alt = place;
-
 
   deleteButton.addEventListener('click', () => deleteCard(deleteButton));
 
@@ -172,7 +170,4 @@ profileAddButton.addEventListener('click', () => {
 });
 popupShowCardCloseButton.addEventListener('click', () => {
   closePopup(popupShowCard);
-  cardImgFull.src = '';
-  cardImgFull.alt = '';
-  cardImgCaption.textContent = '';
 });

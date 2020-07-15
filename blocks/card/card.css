@@ -1,15 +1,3 @@
-@import url(./__image/card__image.css);
-@import url(./__content/card__content.css);
-@import url(./__title/card__title.css);
-@import url(./__btn/card__btn.css);
-@import url(./__btn-icon/card__btn-icon.css);
-@import url(./__delete-btn/card__delete-btn.css);
-@import url(./__delete-icon/card__delete-icon.css);
-@import url(./__btn-active/card__btn-active.css);
-@import url(./__show-image/card__show-image.css);
-@import url(./__img-full/card__img-full.css);
-@import url(./__img-caption/card__img-caption.css);
-
 .card {
   max-width: 282px;
   background-color: #fff;
