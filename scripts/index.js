@@ -58,7 +58,7 @@ const initialCards = [
 ];
 
 function addInitCards (initialCards) {
-  initialCards.forEach(function (item) {
+  initialCards.forEach((item) => {
     const card = createCard({place: item.name, img: item.link});
     addCard(card);
   });
@@ -71,9 +71,8 @@ function closeOnEsc (evt) {
 }
 
 function popupClickHandler (evt) {
-  const popup = document.querySelector(`.${popupOpenedSelector}`);
-  if(!popup.querySelector('.popup__container').contains(evt.target)) {
-    closePopup(popup);
+  if(evt.target === evt.currentTarget) {
+    closePopup(evt.target);
   }
 }
 
