@@ -1,3 +1,4 @@
+import {Card} from './card.js';
 const popupEdit = document.querySelector('.js-popup-edit');
 const popupAdd = document.querySelector('.js-popup-add');
 const popupEditCloseButton = popupEdit.querySelector('.popup__close-btn');
@@ -56,9 +57,6 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
-import {Card} from './card.js';
-export {popupShowCard, cardImgFull, popupShowCardCloseButton, cardImgCaption, openPopup};
 
 function addInitCards (initialCards) {
   initialCards.forEach((item) => {
@@ -149,3 +147,5 @@ profileAddButton.addEventListener('click', () => {
 popupShowCardCloseButton.addEventListener('click', () => {
   closePopup(popupShowCard);
 });
+
+export {popupShowCard, cardImgFull, cardImgCaption, openPopup};
