@@ -14,7 +14,7 @@ const profileJob = profile.querySelector('.profile__job');
 const profileEditButton = profile.querySelector('.profile__btn_type_edit');
 const profileAddButton = profile.querySelector('.profile__btn_type_add');
 const cardsGallery = document.querySelector('.cards-gallery');
-const cardTemplate = document.querySelector('#card-template').content;
+const cardTemplate = document.querySelector('.card-template').content;
 const popupShowCard = document.querySelector('.js-popup-show-card');
 const cardImgFull = popupShowCard.querySelector('.card__img-full');
 const popupShowCardCloseButton = popupShowCard.querySelector('.popup__close-btn');
@@ -57,10 +57,14 @@ const initialCards = [
   }
 ];
 
+import {Card} from './card.js';
+export {popupShowCard, cardImgFull, popupShowCardCloseButton, cardImgCaption, openPopup};
+
 function addInitCards (initialCards) {
   initialCards.forEach((item) => {
-    const card = createCard({place: item.name, img: item.link});
-    addCard(card);
+    const card = new Card(item.name, item.link);
+    const cardElement = card.generateCard();
+    addCard(cardElement);
   });
 }
 
@@ -100,39 +104,6 @@ function deleteCard (button) {
   button.closest('.card').remove();
 }
 
-function createCard ({place, img}) {
-  const card = cardTemplate.cloneNode(true);
-  const cardTitle = card.querySelector('.card__title');
-  const cardImage = card.querySelector('.card__image');
-  const deleteButton = card.querySelector('.card__delete-btn');
-  const cardButton = card.querySelector('.card__btn');
-  const cardShowImage = card.querySelector('.card__show-image');
-
-  cardTitle.textContent = place;
-  cardImage.src = img;
-  cardImage.alt = place;
-
-  deleteButton.addEventListener('click', () => deleteCard(deleteButton));
-
-  cardButton.addEventListener('click', () => {
-    cardButton.classList.toggle('card__btn-active');
-  });
-
-  cardShowImage.addEventListener('click', (evt) => {
-    evt.preventDefault();
-
-    cardImgFull.src = '';
-
-    cardImgFull.src = img;
-    cardImgFull.alt = place;
-    cardImgCaption.textContent = place;
-
-    openPopup(popupShowCard);
-  });
-
-  return card;
-}
-
 function addCard (card) {
   cardsGallery.prepend(card);
 }
@@ -149,8 +120,9 @@ function formEditSubmitHandler (evt) {
 function formAddSubmitHandler (evt) {
   evt.preventDefault();
 
-  const card = createCard({place: placeInput.value, img: imgInput.value});
-  addCard(card);
+  const card = new Card(placeInput.value, imgInput.value);
+  const cardElement = card.generateCard();
+  addCard(cardElement);
 
   closePopup(popupAdd);
 }
