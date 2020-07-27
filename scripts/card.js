@@ -1,6 +1,10 @@
-import {popupShowCard, cardImgFull, cardImgCaption, openPopup} from './index.js';
+import {openPopup} from './utils.js';
 
-export class Card {
+const popupShowCard = document.querySelector('.js-popup-show-card');
+const cardImgFull = popupShowCard.querySelector('.card__img-full');
+const cardImgCaption = popupShowCard.querySelector('.card__img-caption');
+const popupShowCardCloseButton = popupShowCard.querySelector('.popup__close-btn');
+class Card {
   constructor (place, image) {
     this._place = place;
     this._image = image;
@@ -52,3 +56,5 @@ export class Card {
     return this._element;
   }
 }
+
+export {Card, popupShowCardCloseButton}

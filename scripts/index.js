@@ -1,5 +1,5 @@
-import {Card} from './card.js';
-import {FormValidator} from './FormValidator.js';
+import {Card, popupShowCardCloseButton} from './card.js';
+import {closePopup, openPopup} from './utils.js';
 
 const popupEdit = document.querySelector('.js-popup-edit');
 const popupAdd = document.querySelector('.js-popup-add');
@@ -17,22 +17,7 @@ const profileJob = profile.querySelector('.profile__job');
 const profileEditButton = profile.querySelector('.profile__btn_type_edit');
 const profileAddButton = profile.querySelector('.profile__btn_type_add');
 const cardsGallery = document.querySelector('.cards-gallery');
-const cardTemplate = document.querySelector('.card-template').content;
-const popupShowCard = document.querySelector('.js-popup-show-card');
-const cardImgFull = popupShowCard.querySelector('.card__img-full');
-const popupShowCardCloseButton = popupShowCard.querySelector('.popup__close-btn');
-const cardImgCaption = popupShowCard.querySelector('.card__img-caption');
-const popupOpenedSelector = 'popup_opened';
-const config = {
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  controlSelector: '.form__control',
-  submitButtonSelector: '.form__submit-btn',
-  inactiveButtonClass: 'form__submit-btn_inactive',
-  inputErrorClass: 'form__input_type_error',
-  errorSelector: '.form__input-error',
-  errorClass: 'form__input-error_active'
-};
+
 const initialCards = [
   {
       name: 'Архыз',
@@ -66,42 +51,6 @@ function addInitCards (initialCards) {
     const cardElement = card.generateCard();
     addCard(cardElement);
   });
-}
-
-function closeOnEsc (evt) {
-  if (evt.key === 'Escape') {
-    closePopup(document.querySelector(`.${popupOpenedSelector}`));
-  }
-}
-
-function popupClickHandler (evt) {
-  if(evt.target === evt.currentTarget) {
-    closePopup(evt.target);
-  }
-}
-
-function setPopupEventListeners (popup) {
-  document.addEventListener('keydown', closeOnEsc);
-  popup.addEventListener('mousedown', popupClickHandler);
-}
-
-function removePopupEventListeners (popup) {
-  document.removeEventListener('keydown', closeOnEsc);
-  popup.removeEventListener('mousedown', popupClickHandler);
-}
-
-function openPopup (popup) {
-  setPopupEventListeners(popup);
-  if(popup.querySelector('.form')) {
-    const formValidator = new FormValidator(config, popup.querySelector('.form'));
-    const formValidatorElement = formValidator.enableValidation();
-  }
-  popup.classList.add(popupOpenedSelector);
-}
-
-function closePopup (popup) {
-  popup.classList.remove(popupOpenedSelector);
-  removePopupEventListeners(popup);
 }
 
 function addCard (card) {
@@ -146,5 +95,3 @@ profileAddButton.addEventListener('click', () => {
 popupShowCardCloseButton.addEventListener('click', () => {
   closePopup(popupShowCard);
 });
-
-export {popupShowCard, cardImgFull, cardImgCaption, openPopup};
