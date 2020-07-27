@@ -1,5 +1,6 @@
 import {Card, popupShowCardCloseButton} from './card.js';
 import {closePopup, openPopup} from './utils.js';
+import {initialCards} from './initialCards.js';
 
 const popupEdit = document.querySelector('.js-popup-edit');
 const popupAdd = document.querySelector('.js-popup-add');
@@ -17,33 +18,6 @@ const profileJob = profile.querySelector('.profile__job');
 const profileEditButton = profile.querySelector('.profile__btn_type_edit');
 const profileAddButton = profile.querySelector('.profile__btn_type_add');
 const cardsGallery = document.querySelector('.cards-gallery');
-
-const initialCards = [
-  {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 function addInitCards (initialCards) {
   initialCards.forEach((item) => {
