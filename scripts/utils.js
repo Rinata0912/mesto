@@ -1,4 +1,4 @@
-import {FormValidator} from './FormValidator.js';
+import {FormValidator} from './formValidator.js';
 
 const popupOpenedSelector = 'popup_opened';
 const config = {
