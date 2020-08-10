@@ -2,7 +2,8 @@ import {Card, popupShowCardCloseButton} from './card.js';
 import {closePopup, openPopup} from './utils.js';
 import {initialCards} from './initialCards.js';
 import {Section} from './section.js';
-import {Popup} from './popup.js';
+import {PopupWithForm} from './popupWithForm.js';
+import { PopupWithImage } from './popupWithImage.js';
 
 const popupEdit = document.querySelector('.js-popup-edit');
 const popupAdd = document.querySelector('.js-popup-add');
@@ -25,15 +26,18 @@ const cardsGallerySelector = '.cards-gallery';
 const cardList = new Section({
     items: initialCards,
     renderer: (item) => {
-      const card = new Card(item.name, item.link);
+      const card = new Card(item.name, item.link,
+        () => {
+          const popupWithImageElement = new PopupWithImage('.js-popup-show-card', item.link, item.name);
+          popupWithImageElement.open();
+        }
+      );
       const cardElement = card.generateCard();
       cardList.addItem(cardElement);
     }
   },
   cardsGallerySelector
 );
-
-// const popupElement = new Popup('.popup');
 
 function addCard (card) {
   cardsGallery.prepend(card);
@@ -48,20 +52,20 @@ function formEditSubmitHandler (evt) {
   closePopup(popupEdit);
 }
 
-function formAddSubmitHandler (evt) {
-  evt.preventDefault();
+// function formAddSubmitHandler (evt) {
+//   evt.preventDefault();
 
-  const card = new Card(placeInput.value, imgInput.value);
-  const cardElement = card.generateCard();
-  addCard(cardElement);
+//   const card = new Card(placeInput.value, imgInput.value);
+//   const cardElement = card.generateCard();
+//   addCard(cardElement);
 
-  closePopup(popupAdd);
-}
+//   closePopup(popupAdd);
+// }
 
 cardList.renderElements();
 
 formElementEdit.addEventListener('submit', formEditSubmitHandler);
-formElementAdd.addEventListener('submit', formAddSubmitHandler);
+// formElementAdd.addEventListener('submit', formAddSubmitHandler);
 popupEditCloseButton.addEventListener('click', () => closePopup(popupEdit));
 popupAddCloseButton.addEventListener('click', () => closePopup(popupAdd));
 profileEditButton.addEventListener('click', () => {
@@ -70,10 +74,27 @@ profileEditButton.addEventListener('click', () => {
   openPopup(popupEdit);
 });
 profileAddButton.addEventListener('click', () => {
-  placeInput.value = '';
-  imgInput.value = '';
-  openPopup(popupAdd);
+  // placeInput.value = '';
+  // imgInput.value = '';
+  // openPopup(popupAdd);
+  const popupElement = new PopupWithForm ('.js-popup-add',
+    (formValues) => {
+      const card = new Card(formValues.place, formValues.image,
+        () => {
+          const popupWithImageElement = new PopupWithImage('.js-popup-show-card', formValues.image, formValues.place);
+          popupWithImageElement.open();
+        }
+      );
+      const cardElement = card.generateCard();
+      addCard(cardElement);
+
+      popupElement.close();
+    }
+  );
+
+  popupElement.open();
+
 });
 popupShowCardCloseButton.addEventListener('click', () => {
-  closePopup(popupShowCard);
+  // closePopup(popupShowCard);
 });

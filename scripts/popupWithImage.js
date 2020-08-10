@@ -10,8 +10,11 @@ export class PopupWithImage extends Popup {
   open () {
     const imageContainer = this._popupElement.querySelector('.card__img-full');
     const imageCaption = this._popupElement.querySelector('.card__img-caption');
+    imageContainer.src = '';
     imageContainer.src = this._image;
     imageContainer.alt = this._place;
     imageCaption.textContent = this._place;
+    this.setEventListeners();
+    this._popupElement.classList.add('popup_opened');
   }
 }

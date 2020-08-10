@@ -5,9 +5,10 @@ const cardImgFull = popupShowCard.querySelector('.card__img-full');
 const cardImgCaption = popupShowCard.querySelector('.card__img-caption');
 const popupShowCardCloseButton = popupShowCard.querySelector('.popup__close-btn');
 class Card {
-  constructor (place, image) {
+  constructor (place, image, handleCardClick) {
     this._place = place;
     this._image = image;
+    this._handleCardClick = handleCardClick;
   }
 
   _getCardTemplate() {
@@ -23,22 +24,22 @@ class Card {
     this._element.querySelector('.card__btn').classList.toggle('card__btn-active');
   };
 
-  _showImage() {
-    cardImgFull.src = '';
+  // _showImage() {
+  //   cardImgFull.src = '';
 
-    cardImgFull.src = this._image;
-    cardImgFull.alt = this._place;
-    cardImgCaption.textContent = this._place;
+  //   cardImgFull.src = this._image;
+  //   cardImgFull.alt = this._place;
+  //   cardImgCaption.textContent = this._place;
 
-    openPopup(popupShowCard);
-  }
+  //   openPopup(popupShowCard);
+  // }
 
   _setEventListeners() {
     this._element.querySelector('.card__delete-btn').addEventListener('click', this._deleteCard);
     this._element.querySelector('.card__btn').addEventListener('click', this._toggleCardButton);
     this._element.querySelector('.card__show-image').addEventListener('click', (evt) => {
       evt.preventDefault();
-      this._showImage();
+      this._handleCardClick();
     });
   }
 

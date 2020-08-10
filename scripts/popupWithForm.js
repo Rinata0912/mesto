@@ -1,6 +1,6 @@
 import {Popup} from './popup.js';
 
-export class PopupWithForm {
+export class PopupWithForm extends Popup{
   constructor (popupSelector, handleFormSubmit) {
     super (popupSelector);
     this._handleFormSubmit = handleFormSubmit;
@@ -22,11 +22,15 @@ export class PopupWithForm {
   setEventListeners () {
     document.addEventListener('keydown', this._handleEscClose);
     this._popupElement.addEventListener('mousedown', this._handleClickClose);
-
-    this._handleFormSubmit(this._getInputValues());
+    this._formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      this._handleFormSubmit(this._getInputValues());
+    });
   }
 
   close () {
-
+    this.removeEventListeners();
+    this._popupElement.classList.remove('popup_opened');
+    this._formElement.reset();
   }
 }
