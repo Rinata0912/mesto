@@ -2,6 +2,7 @@ import {Card, popupShowCardCloseButton} from './card.js';
 import {closePopup, openPopup} from './utils.js';
 import {initialCards} from './initialCards.js';
 import {Section} from './section.js';
+import {Popup} from './popup.js';
 
 const popupEdit = document.querySelector('.js-popup-edit');
 const popupAdd = document.querySelector('.js-popup-add');
@@ -31,6 +32,8 @@ const cardList = new Section({
   },
   cardsGallerySelector
 );
+
+// const popupElement = new Popup('.popup');
 
 function addCard (card) {
   cardsGallery.prepend(card);
