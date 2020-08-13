@@ -64,7 +64,7 @@ export class FormValidator {
     });
   }
 
-  _cleanForm () {
+  cleanForm () {
     if(this._formElement) {
       const inputList = this._formElement.querySelectorAll(this._data.inputSelector);
       const formButtom = this._formElement.querySelector(this._data.submitButtonSelector);
@@ -76,7 +76,7 @@ export class FormValidator {
   }
 
   enableValidation () {
-    this._cleanForm();
+    this.cleanForm();
     this._setEventListeners();
   }
 }

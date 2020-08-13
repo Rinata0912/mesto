@@ -1,4 +1,4 @@
-import {FormValidator} from './formValidator.js';
+// import {FormValidator} from './formValidator.js';
 
 const popupOpenedSelector = 'popup_opened';
 const config = {
@@ -12,47 +12,47 @@ const config = {
   errorClass: 'form__input-error_active'
 };
 
-function removePopupEventListeners (popup) {
-  document.removeEventListener('keydown', closeOnEsc);
-  popup.removeEventListener('mousedown', popupClickHandler);
-}
+// function removePopupEventListeners (popup) {
+//   document.removeEventListener('keydown', closeOnEsc);
+//   popup.removeEventListener('mousedown', popupClickHandler);
+// }
 
-function closePopup (popup) {
-  popup.classList.remove(popupOpenedSelector);
-  removePopupEventListeners(popup);
-}
+// function closePopup (popup) {
+//   popup.classList.remove(popupOpenedSelector);
+//   removePopupEventListeners(popup);
+// }
 
-function popupClickHandler (evt) {
-  if(evt.target === evt.currentTarget) {
-    closePopup(evt.target);
-  }
-}
+// function popupClickHandler (evt) {
+//   if(evt.target === evt.currentTarget) {
+//     closePopup(evt.target);
+//   }
+// }
 
-function closeOnEsc (evt) {
-  if (evt.key === 'Escape') {
-    closePopup(document.querySelector(`.${popupOpenedSelector}`));
-  }
-}
+// function closeOnEsc (evt) {
+//   if (evt.key === 'Escape') {
+//     closePopup(document.querySelector(`.${popupOpenedSelector}`));
+//   }
+// }
 
-function setFormValidator (form) {
-  const formValidator = new FormValidator(config, form);
-  formValidator.enableValidation();
-}
+// function setFormValidator (form) {
+//   const formValidator = new FormValidator(config, form);
+//   formValidator.enableValidation();
+// }
 
-function setPopupEventListeners (popup) {
-  document.addEventListener('keydown', closeOnEsc);
-  popup.addEventListener('mousedown', popupClickHandler);
-}
+// function setPopupEventListeners (popup) {
+//   document.addEventListener('keydown', closeOnEsc);
+//   popup.addEventListener('mousedown', popupClickHandler);
+// }
 
-function openPopup (popup) {
-  setPopupEventListeners(popup);
-  if(popup.querySelector('.form')) {
-    setFormValidator(popup.querySelector('.form'));
-  }
-  popup.classList.add(popupOpenedSelector);
-}
+// function openPopup (popup) {
+//   setPopupEventListeners(popup);
+//   if(popup.querySelector('.form')) {
+//     setFormValidator(popup.querySelector('.form'));
+//   }
+//   popup.classList.add(popupOpenedSelector);
+// }
 
-export {popupOpenedSelector, config, removePopupEventListeners, closePopup, popupClickHandler, closeOnEsc, setFormValidator, setPopupEventListeners, openPopup};
+export {popupOpenedSelector, config};
 
 
 

@@ -1,9 +1,8 @@
-import {openPopup} from './utils.js';
-
 const popupShowCard = document.querySelector('.js-popup-show-card');
 const cardImgFull = popupShowCard.querySelector('.card__img-full');
 const cardImgCaption = popupShowCard.querySelector('.card__img-caption');
 const popupShowCardCloseButton = popupShowCard.querySelector('.popup__close-btn');
+
 class Card {
   constructor (place, image, handleCardClick) {
     this._place = place;
@@ -18,21 +17,12 @@ class Card {
 
   _deleteCard = () => {
     this._element.remove();
+    this._element = null;
   };
 
   _toggleCardButton = () => {
     this._element.querySelector('.card__btn').classList.toggle('card__btn-active');
   };
-
-  // _showImage() {
-  //   cardImgFull.src = '';
-
-  //   cardImgFull.src = this._image;
-  //   cardImgFull.alt = this._place;
-  //   cardImgCaption.textContent = this._place;
-
-  //   openPopup(popupShowCard);
-  // }
 
   _setEventListeners() {
     this._element.querySelector('.card__delete-btn').addEventListener('click', this._deleteCard);
