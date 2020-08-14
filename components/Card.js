@@ -1,7 +1,7 @@
-const popupShowCard = document.querySelector('.js-popup-show-card');
-const cardImgFull = popupShowCard.querySelector('.card__img-full');
-const cardImgCaption = popupShowCard.querySelector('.card__img-caption');
-const popupShowCardCloseButton = popupShowCard.querySelector('.popup__close-btn');
+import { popupShowCardSelector, popupCloseBtnSelector } from '../utils/constants.js';
+
+const popupShowCard = document.querySelector(popupShowCardSelector);
+const popupShowCardCloseButton = popupShowCard.querySelector(popupCloseBtnSelector);
 
 class Card {
   constructor (place, image, handleCardClick) {

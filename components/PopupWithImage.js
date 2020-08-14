@@ -1,4 +1,5 @@
-import {Popup} from './popup.js';
+import { Popup } from './Popup.js';
+import { popupOpenedSelector } from '../utils/constants.js';
 
 export class PopupWithImage extends Popup {
   constructor (popupSelector, image, place) {
@@ -15,6 +16,6 @@ export class PopupWithImage extends Popup {
     imageContainer.alt = this._place;
     imageCaption.textContent = this._place;
     this.setEventListeners();
-    this._popupElement.classList.add('popup_opened');
+    this._popupElement.classList.add(popupOpenedSelector);
   }
 }

@@ -1,4 +1,5 @@
-import {Popup} from './popup.js';
+import { Popup } from './Popup.js';
+import { popupOpenedSelector } from '../utils/constants.js';
 
 export class PopupWithForm extends Popup{
   constructor (popupSelector, handleFormSubmit) {
@@ -43,12 +44,12 @@ export class PopupWithForm extends Popup{
 
   close () {
     this.removeEventListeners();
-    this._popupElement.classList.remove('popup_opened');
+    this._popupElement.classList.remove(popupOpenedSelector);
     this._formElement.reset();
   }
 
   open () {
     this.setEventListeners();
-    this._popupElement.classList.add('popup_opened');
+    this._popupElement.classList.add(popupOpenedSelector);
   }
 }
