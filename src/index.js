@@ -1,10 +1,11 @@
-import { Card } from '../components/Card.js';
-import { Section } from '../components/Section.js';
-import { PopupWithForm } from '../components/PopupWithForm.js';
-import { PopupWithImage } from '../components/PopupWithImage.js';
-import { UserInfo } from '../components/UserInfo.js';
-import { FormValidator } from '../components/formValidator.js';
-import { cardsGallerySelector, popupShowCardSelector, profileNameSelector, profileJobSelector, popupAddSelector, popupEditSelector, config, initialCards } from '../utils/constants.js';
+import './pages/index.css';
+import { Card } from './components/Card.js';
+import { Section } from './components/Section.js';
+import { PopupWithForm } from './components/PopupWithForm.js';
+import { PopupWithImage } from './components/PopupWithImage.js';
+import { UserInfo } from './components/UserInfo.js';
+import { FormValidator } from './components/formValidator.js';
+import { cardsGallerySelector, popupShowCardSelector, profileNameSelector, profileJobSelector, popupAddSelector, popupEditSelector, config, initialCards } from './utils/constants.js';
 
 const nameInput = document.querySelector('.js-input-name');
 const jobInput = document.querySelector('.js-input-job');
