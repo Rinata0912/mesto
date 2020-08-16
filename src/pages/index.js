@@ -1,11 +1,11 @@
-import './pages/index.css';
-import { Card } from './components/Card.js';
-import { Section } from './components/Section.js';
-import { PopupWithForm } from './components/PopupWithForm.js';
-import { PopupWithImage } from './components/PopupWithImage.js';
-import { UserInfo } from './components/UserInfo.js';
-import { FormValidator } from './components/formValidator.js';
-import { cardsGallerySelector, popupShowCardSelector, profileNameSelector, profileJobSelector, popupAddSelector, popupEditSelector, config, initialCards } from './utils/constants.js';
+import './index.css';
+import { Card } from '../components/Card.js';
+import { Section } from '../components/Section.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { UserInfo } from '../components/UserInfo.js';
+import { FormValidator } from '../components/formValidator.js';
+import { cardsGallerySelector, popupShowCardSelector, profileNameSelector, profileJobSelector, popupAddSelector, popupEditSelector, config, initialCards } from '../utils/constants.js';
 
 const nameInput = document.querySelector('.js-input-name');
 const jobInput = document.querySelector('.js-input-job');
@@ -17,8 +17,8 @@ const cardList = new Section({
     renderer: (item) => {
       const card = new Card(item.name, item.link,
         () => {
-          const popupWithImageElement = new PopupWithImage(popupShowCardSelector, item.link, item.name);
-          popupWithImageElement.open();
+          const popupWithImageElement = new PopupWithImage(popupShowCardSelector);
+          popupWithImageElement.open(item.link, item.name);
         }
       );
       const cardElement = card.generateCard();
@@ -40,8 +40,8 @@ const popupAddCard = new PopupWithForm (popupAddSelector,
   (formValues) => {
     const card = new Card(formValues.place, formValues.image,
       () => {
-        const popupWithImageElement = new PopupWithImage(popupShowCardSelector, formValues.image, formValues.place);
-        popupWithImageElement.open();
+        const popupWithImageElement = new PopupWithImage(popupShowCardSelector);
+        popupWithImageElement.open(formValues.image, formValues.place);
       }
     );
     const cardElement = card.generateCard();

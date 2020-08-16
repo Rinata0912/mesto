@@ -4,8 +4,6 @@ const profileNameSelector = '.profile__name';
 const profileJobSelector = '.profile__job';
 const popupAddSelector = '.js-popup-add';
 const popupEditSelector = '.js-popup-edit';
-const popupOpenedSelector = 'popup_opened';
-const popupCloseBtnSelector = '.popup__close-btn';
 const config = {
   formSelector: '.form',
   inputSelector: '.form__input',
@@ -43,4 +41,4 @@ const initialCards = [
   }
 ];
 
-export { cardsGallerySelector, popupShowCardSelector, profileNameSelector, profileJobSelector, popupAddSelector, popupEditSelector, popupOpenedSelector, config, initialCards, popupCloseBtnSelector };
+export { cardsGallerySelector, popupShowCardSelector, profileNameSelector, profileJobSelector, popupAddSelector, popupEditSelector, config, initialCards };

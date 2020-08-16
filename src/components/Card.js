@@ -1,8 +1,3 @@
-import { popupShowCardSelector, popupCloseBtnSelector } from '../utils/constants.js';
-
-const popupShowCard = document.querySelector(popupShowCardSelector);
-const popupShowCardCloseButton = popupShowCard.querySelector(popupCloseBtnSelector);
-
 class Card {
   constructor (place, image, handleCardClick) {
     this._place = place;
@@ -48,4 +43,4 @@ class Card {
   }
 }
 
-export {Card, popupShowCardCloseButton}
+export {Card}

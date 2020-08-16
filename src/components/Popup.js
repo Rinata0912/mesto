@@ -1,10 +1,8 @@
-import { popupOpenedSelector, popupCloseBtnSelector } from '../utils/constants.js';
-
 export class Popup {
   constructor (popupSelector) {
     this._popupSelector = popupSelector;
     this._popupElement = document.querySelector(popupSelector);
-    this._closeButton = document.querySelector(popupSelector).querySelector(popupCloseBtnSelector);
+    this._closeButton = document.querySelector(popupSelector).querySelector('.popup__close-btn');
   }
 
   setEventListeners () {
@@ -31,11 +29,11 @@ export class Popup {
 
   open () {
     this.setEventListeners();
-    this._popupElement.classList.add(popupOpenedSelector);
+    this._popupElement.classList.add('popup_opened');
   }
 
   close() {
     this.removeEventListeners();
-    this._popupElement.classList.remove(popupOpenedSelector);
+    this._popupElement.classList.remove('popup_opened');
   }
 }
