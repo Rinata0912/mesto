@@ -13,6 +13,9 @@
 
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__avatar-edit/profile__avatar-edit.css);
+@import url(../blocks/profile/__avatar-edit-icon/profile__avatar-edit-icon.css);
+@import url(../blocks/profile/__avatar-img/profile__avatar-img.css);
 @import url(../blocks/profile/__btn-icon/profile__btn-icon.css);
 @import url(../blocks/profile/__btn-icon/_type/profile__btn-icon_type_add.css);
 @import url(../blocks/profile/__btn-icon/_type/profile__btn-icon_type_edit.css);
