@@ -40,15 +40,17 @@ api.getInitialCards().then(initCards => {
 
   const popupAddCard = new PopupWithForm (popupAddSelector,
     (formValues) => {
-      const card = new Card(formValues.place, formValues.image,
-        () => {
-          const popupWithImageElement = new PopupWithImage(popupShowCardSelector);
-          popupWithImageElement.open(formValues.image, formValues.place);
-        }
-      );
-      const cardElement = card.generateCard();
-      cardList.addItem(cardElement);
-      popupAddCard.close();
+      api.addCard(formValues.place, formValues.image).then(cardItem => {
+        const card = new Card(cardItem.name, cardItem.link,
+          () => {
+            const popupWithImageElement = new PopupWithImage(popupShowCardSelector);
+            popupWithImageElement.open(formValues.image, formValues.place);
+          }
+        );
+        const cardElement = card.generateCard();
+        cardList.addItem(cardElement);
+        popupAddCard.close();
+      })
     }
   );
 

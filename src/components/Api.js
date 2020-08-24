@@ -41,4 +41,22 @@ export class Api {
       })
       .then(res => res)
   }
+
+  addCard(name, link) {
+    return fetch(`${this._options.baseUrl}/cards`, {
+      method: 'POST',
+      headers: this._options.headers,
+      body: JSON.stringify({
+        name,
+        link
+      })
+    })
+      .then(res => {
+        if(res.ok) {
+          return res.json();
+        }
+        console.log('ошибка');
+      })
+      .then(res => res)
+  }
 }
