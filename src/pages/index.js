@@ -70,12 +70,6 @@ cardList.renderElements();
 
 profileEditButton.addEventListener('click', () => {
   const profileInfo = userInfo.getUserInfo();
-  api.getUserInfo().then(profileInfo => {
-     nameInput.value = profileInfo.name;
-    jobInput.value = profileInfo.about;
-
-
-  })
 
   nameInput.value = profileInfo.name;
   jobInput.value = profileInfo.job;
