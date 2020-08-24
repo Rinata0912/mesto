@@ -1,7 +1,8 @@
 class Card {
-  constructor (place, image, handleCardClick) {
+  constructor (place, image, likes, handleCardClick) {
     this._place = place;
     this._image = image;
+    this._likes = likes.length;
     this._handleCardClick = handleCardClick;
   }
 
@@ -34,10 +35,12 @@ class Card {
 
     const cardImage = this._element.querySelector('.card__image');
     const cardPlace = this._element.querySelector('.card__title');
+    const cardLikes = this._element.querySelector('.card__like-counter');
 
     cardImage.src = this._image;
     cardImage.alt = this._place;
     cardPlace.textContent = this._place;
+    cardLikes.textContent = this._likes;
 
     return this._element;
   }

@@ -26,7 +26,7 @@ api.getInitialCards().then(initCards => {
   const cardList = new Section({
     items: initCards,
     renderer: (item) => {
-      const card = new Card(item.name, item.link,
+      const card = new Card(item.name, item.link, item.likes,
         () => {
           const popupWithImageElement = new PopupWithImage(popupShowCardSelector);
           popupWithImageElement.open(item.link, item.name);
@@ -41,7 +41,7 @@ api.getInitialCards().then(initCards => {
   const popupAddCard = new PopupWithForm (popupAddSelector,
     (formValues) => {
       api.addCard(formValues.place, formValues.image).then(cardItem => {
-        const card = new Card(cardItem.name, cardItem.link,
+        const card = new Card(cardItem.name, cardItem.link, cardItem.likes,
           () => {
             const popupWithImageElement = new PopupWithImage(popupShowCardSelector);
             popupWithImageElement.open(formValues.image, formValues.place);
