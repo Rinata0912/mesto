@@ -5,6 +5,7 @@ import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { FormValidator } from '../components/formValidator.js';
+import { Api } from '../components/Api.js';
 import { cardsGallerySelector, popupShowCardSelector, profileNameSelector, profileJobSelector, popupAddSelector, popupEditSelector, config, initialCards } from '../utils/constants.js';
 
 const nameInput = document.querySelector('.js-input-name');
@@ -50,6 +51,14 @@ const popupAddCard = new PopupWithForm (popupAddSelector,
   }
 );
 
+const api = new Api({baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14/users/me',
+    authorization: '0104c4f6-b4d1-4baf-96ce-c414c2f8cbbe'
+});
+api.getUserInfo().then(apiUserInfo => {
+  userInfo.setUserInfo(apiUserInfo.name, apiUserInfo.about);
+})
+
+
 const addFormValidator = new FormValidator(config, popupAddCard.returnFormElement());
 
 const editFormValidator = new FormValidator(config, popupEditProfile.returnFormElement());
@@ -61,12 +70,18 @@ cardList.renderElements();
 
 profileEditButton.addEventListener('click', () => {
   const profileInfo = userInfo.getUserInfo();
+  api.getUserInfo().then(profileInfo => {
+     nameInput.value = profileInfo.name;
+    jobInput.value = profileInfo.about;
+
+
+  })
 
   nameInput.value = profileInfo.name;
   jobInput.value = profileInfo.job;
 
   editFormValidator.cleanForm();
-  popupEditProfile.open();
+    popupEditProfile.open();
 });
 
 profileAddButton.addEventListener('click', () => {
