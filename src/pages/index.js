@@ -6,7 +6,7 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { FormValidator } from '../components/formValidator.js';
 import { Api } from '../components/Api.js';
-import { cardsGallerySelector, popupShowCardSelector, profileNameSelector, profileJobSelector, popupAddSelector, popupEditSelector, config, initialCards } from '../utils/constants.js';
+import { cardsGallerySelector, popupShowCardSelector, profileNameSelector, profileJobSelector, popupAddSelector, popupEditSelector, config, initialCards, popupConfirmSelector } from '../utils/constants.js';
 
 const nameInput = document.querySelector('.js-input-name');
 const jobInput = document.querySelector('.js-input-job');
@@ -30,6 +30,10 @@ api.getInitialCards().then(initCards => {
         () => {
           const popupWithImageElement = new PopupWithImage(popupShowCardSelector);
           popupWithImageElement.open(item.link, item.name);
+        },
+        () => {
+          const popupConfirm = new PopupWithForm(popupConfirmSelector);
+          popupConfirm.open();
         }
       );
       const cardElement = card.generateCard();
