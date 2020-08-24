@@ -4,23 +4,23 @@ export class Api {
   }
 
   getInitialCards() {
-    return fetch(`${this._options.baseUrl}`)
-      .then(res => res.json())
-      .then(console.log(res))
+    return fetch(`${this._options.baseUrl}/cards`, {headers: this._options.headers})
+      .then(res => {
+        if(res.ok) {
+          return res.json();
+        }
+      })
+      .then(res => res)
   }
 
   getUserInfo() {
-    return fetch(this._options.baseUrl, {
-      headers: {
-        authorization: this._options.authorization
-      }
-    })
+    return fetch(`${this._options.baseUrl}/users/me`, {headers: this._options.headers})
       .then(res => {
         if(res.ok) {
           return res.json();
         }
         console.log('ошибка');
       })
-      .then(res => console.log(res)|| res)
+      .then(res => res)
   }
 }
