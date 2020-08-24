@@ -23,4 +23,22 @@ export class Api {
       })
       .then(res => res)
   }
+
+  editProfileInfo(name, about) {
+    return fetch(`${this._options.baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._options.headers,
+      body: JSON.stringify({
+        name,
+        about
+      })
+    })
+      .then(res => {
+        if(res.ok) {
+          return res.json();
+        }
+        console.log('ошибка');
+      })
+      .then(res => res)
+  }
 }

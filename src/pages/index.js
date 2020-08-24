@@ -67,7 +67,7 @@ const userInfo = new UserInfo({nameSelector: profileNameSelector, jobSelector: p
 
 const popupEditProfile = new PopupWithForm(popupEditSelector,
   (formValues) => {
-    userInfo.setUserInfo(formValues.name, formValues.job);
+    api.editProfileInfo(formValues.name, formValues.job).then(profileInfo => userInfo.setUserInfo(profileInfo.name, profileInfo.about));
   }
 );
 
