@@ -1,10 +1,16 @@
 class Card {
-  constructor (place, image, likes, handleCardClick, handleDeleteBtnClick) {
+  constructor ({place, image, likes, isOwn, id, handleCardClick, handleDeleteBtnClick}) {
     this._place = place;
     this._image = image;
     this._likes = likes.length;
+    this._isOwn = isOwn;
+    this._id = id;
     this._handleCardClick = handleCardClick;
     this._handleDeleteBtnClick = handleDeleteBtnClick;
+  }
+
+  getCardID() {
+    return this._id;
   }
 
   _getCardTemplate() {
@@ -40,6 +46,8 @@ class Card {
     const cardImage = this._element.querySelector('.card__image');
     const cardPlace = this._element.querySelector('.card__title');
     const cardLikes = this._element.querySelector('.card__like-counter');
+    const cardDeleteBtn = this._element.querySelector('.card__delete-btn');
+    if(this._isOwn) cardDeleteBtn.classList.add('card__delete-btn_state_visible');
 
     cardImage.src = this._image;
     cardImage.alt = this._place;

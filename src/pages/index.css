@@ -38,6 +38,7 @@
 @import url(../blocks/card/__btn-icon/card__btn-icon.css);
 @import url(../blocks/card/__content/card__content.css);
 @import url(../blocks/card/__delete-btn/card__delete-btn.css);
+@import url(../blocks/card/__delete-btn/_state/card__delete-btn_state_visible.css);
 @import url(../blocks/card/__delete-icon/card__delete-icon.css);
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__img-caption/card__img-caption.css);

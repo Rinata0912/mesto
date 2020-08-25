@@ -3,7 +3,7 @@ export class Api {
     this._options = options;
   }
 
-  getInitialCards() {
+  getInitialCards () {
     return fetch(`${this._options.baseUrl}/cards`, {headers: this._options.headers})
       .then(res => {
         if(res.ok) {
@@ -13,7 +13,7 @@ export class Api {
       .then(res => res)
   }
 
-  getUserInfo() {
+  getUserInfo () {
     return fetch(`${this._options.baseUrl}/users/me`, {headers: this._options.headers})
       .then(res => {
         if(res.ok) {
@@ -24,7 +24,7 @@ export class Api {
       .then(res => res)
   }
 
-  editProfileInfo(name, about) {
+  editProfileInfo (name, about) {
     return fetch(`${this._options.baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._options.headers,
@@ -42,7 +42,7 @@ export class Api {
       .then(res => res)
   }
 
-  addCard(name, link) {
+  addCard (name, link) {
     return fetch(`${this._options.baseUrl}/cards`, {
       method: 'POST',
       headers: this._options.headers,
@@ -50,6 +50,34 @@ export class Api {
         name,
         link
       })
+    })
+      .then(res => {
+        if(res.ok) {
+          return res.json();
+        }
+        console.log('ошибка');
+      })
+      .then(res => res)
+  }
+
+  deleteCard (id) {
+    return fetch(`${this._options.baseUrl}/cards/${id}`, {
+      method: 'DELETE',
+      headers: this._options.headers
+    })
+      .then(res => {
+        if(res.ok) {
+          return res.json();
+        }
+        console.log('ошибка');
+      })
+      .then(res => res)
+  }
+
+  likeCard (id) {
+    return fetch(`${this._options.baseUrl}/cards/likes/${id}`, {
+      method: 'PUT',
+      headers: this._options.headers
     })
       .then(res => {
         if(res.ok) {

@@ -13,8 +13,13 @@ export class UserInfo {
     return profileInfo;
   }
 
-  setUserInfo (name, job) {
+  getUserID () {
+    return this._userID;
+  }
+
+  setUserInfo (name, job, userID) {
     this._nameElement.textContent = name;
     this._jobElement.textContent = job;
+    this._userID = userID;
   }
 }

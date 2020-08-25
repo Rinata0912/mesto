@@ -3,6 +3,7 @@ import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupDeleteCard } from '../components/PopupDeleteCard.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { FormValidator } from '../components/formValidator.js';
 import { Api } from '../components/Api.js';
@@ -19,55 +20,69 @@ const api = new Api({baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14',
     'Content-Type': 'application/json'
   }
 });
-api.getUserInfo().then(apiUserInfo => {
-  userInfo.setUserInfo(apiUserInfo.name, apiUserInfo.about);
-})
-api.getInitialCards().then(initCards => {
-  const cardList = new Section({
-    items: initCards,
-    renderer: (item) => {
-      const card = new Card(item.name, item.link, item.likes,
-        () => {
-          const popupWithImageElement = new PopupWithImage(popupShowCardSelector);
-          popupWithImageElement.open(item.link, item.name);
-        },
-        () => {
-          const popupConfirm = new PopupWithForm(popupConfirmSelector);
-          popupConfirm.open();
-        }
-      );
-      const cardElement = card.generateCard();
-      cardList.addItem(cardElement);
-    }
-  },
-  cardsGallerySelector);
 
-  const popupAddCard = new PopupWithForm (popupAddSelector,
-    (formValues) => {
-      api.addCard(formValues.place, formValues.image).then(cardItem => {
-        const card = new Card(cardItem.name, cardItem.link, cardItem.likes,
-          () => {
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(values => {
+    const [apiUserInfo, initCards] = values;
+    userInfo.setUserInfo(apiUserInfo.name, apiUserInfo.about, apiUserInfo._id);
+
+    const cardList = new Section({
+      items: initCards,
+      renderer: (item) => {
+        const card = new Card({place: item.name, image: item.link, likes: item.likes, isOwn: item.owner._id === userInfo.getUserID(), id: item._id,
+          handleCardClick: () => {
             const popupWithImageElement = new PopupWithImage(popupShowCardSelector);
-            popupWithImageElement.open(formValues.image, formValues.place);
+            popupWithImageElement.open(item.link, item.name);
+          },
+          handleDeleteBtnClick: () => {
+            const popupConfirm = new PopupDeleteCard(popupConfirmSelector,
+              () => {
+                api.deleteCard(card.getCardID()).then(res => card.deleteCard());
+              }
+            );
+            popupConfirm.open();
           }
-        );
+        });
         const cardElement = card.generateCard();
         cardList.addItem(cardElement);
-        popupAddCard.close();
-      })
-    }
-  );
+      }
+    },
+    cardsGallerySelector);
 
-  const addFormValidator = new FormValidator(config, popupAddCard.returnFormElement());
+    const popupAddCard = new PopupWithForm (popupAddSelector,
+      (formValues) => {
+        api.addCard(formValues.place, formValues.image).then(cardItem => {
+          const card = new Card({place: cardItem.name, image: cardItem.link, likes: cardItem.likes, isOwn: true, id: cardItem._id,
+            handleCardClick: () => {
+              const popupWithImageElement = new PopupWithImage(popupShowCardSelector);
+              popupWithImageElement.open(formValues.image, formValues.place);
+            },
+            handleDeleteBtnClick: () => {
+              const popupConfirm = new PopupDeleteCard(popupConfirmSelector,
+                  () => {
+                    api.deleteCard(card.getCardID()).then(res => card.deleteCard());
+                  }
+                );
+              popupConfirm.open();
+            }
+          });
+          const cardElement = card.generateCard();
+          cardList.addItem(cardElement);
+          popupAddCard.close();
+        })
+      }
+    );
 
-  addFormValidator.enableValidation();
-  cardList.renderElements();
+    const addFormValidator = new FormValidator(config, popupAddCard.returnFormElement());
 
-  profileAddButton.addEventListener('click', () => {
-    addFormValidator.cleanForm();
-    popupAddCard.open();
-  });
-});
+    addFormValidator.enableValidation();
+    cardList.renderElements();
+
+    profileAddButton.addEventListener('click', () => {
+      addFormValidator.cleanForm();
+      popupAddCard.open();
+    });
+  })
 
 const userInfo = new UserInfo({nameSelector: profileNameSelector, jobSelector: profileJobSelector});
 
