@@ -25,11 +25,18 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(values => {
     const [apiUserInfo, initCards] = values;
     userInfo.setUserInfo(apiUserInfo.name, apiUserInfo.about, apiUserInfo._id);
+    const userID = userInfo.getUserID();
 
     const cardList = new Section({
-      items: initCards,
+      items: initCards.reverse(),
       renderer: (item) => {
-        const card = new Card({place: item.name, image: item.link, likes: item.likes, isOwn: item.owner._id === userInfo.getUserID(), id: item._id,
+        const card = new Card({
+          place: item.name,
+          image: item.link,
+          likes: item.likes,
+          isOwn: item.owner._id === userID,
+          id: item._id,
+          isLiked: !!item.likes.find((like) => like._id === userID),
           handleCardClick: () => {
             const popupWithImageElement = new PopupWithImage(popupShowCardSelector);
             popupWithImageElement.open(item.link, item.name);
@@ -41,9 +48,21 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
               }
             );
             popupConfirm.open();
+          },
+          handleLike: () => {
+            api.likeCard(card.getCardID()).then(res => {
+              card.updateLikeCounter(res.likes);
+              card.toggleCardButton();
+            })
+          },
+          handleUnlike: () => {
+            return api.unlikeCard(card.getCardID()).then(res => {
+              card.updateLikeCounter(res.likes);
+              card.toggleCardButton();
+            })
           }
         });
-        const cardElement = card.generateCard();
+        const cardElement = card.generateCard(userID);
         cardList.addItem(cardElement);
       }
     },
@@ -52,7 +71,13 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     const popupAddCard = new PopupWithForm (popupAddSelector,
       (formValues) => {
         api.addCard(formValues.place, formValues.image).then(cardItem => {
-          const card = new Card({place: cardItem.name, image: cardItem.link, likes: cardItem.likes, isOwn: true, id: cardItem._id,
+          const card = new Card({
+            place: cardItem.name,
+            image: cardItem.link,
+            likes: cardItem.likes,
+            isOwn: true,
+            id: cardItem._id,
+            isLiked: false,
             handleCardClick: () => {
               const popupWithImageElement = new PopupWithImage(popupShowCardSelector);
               popupWithImageElement.open(formValues.image, formValues.place);
@@ -64,6 +89,18 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
                   }
                 );
               popupConfirm.open();
+            },
+            handleLike: () => {
+              api.likeCard(card.getCardID()).then(res => {
+                card.updateLikeCounter(res.likes);
+                card.toggleCardButton();
+              });
+            },
+            handleUnlike: () => {
+              api.unlikeCard(card.getCardID()).then(res => {
+                card.updateLikeCounter(res.likes);
+                card.toggleCardButton();
+              })
             }
           });
           const cardElement = card.generateCard();

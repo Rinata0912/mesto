@@ -87,4 +87,18 @@ export class Api {
       })
       .then(res => res)
   }
+
+  unlikeCard (id) {
+    return fetch(`${this._options.baseUrl}/cards/likes/${id}`, {
+      method: 'DELETE',
+      headers: this._options.headers
+    })
+      .then(res => {
+        if(res.ok) {
+          return res.json();
+        }
+        console.log('ошибка');
+      })
+      .then(res => res)
+  }
 }
