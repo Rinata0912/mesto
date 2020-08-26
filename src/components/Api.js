@@ -101,4 +101,21 @@ export class Api {
       })
       .then(res => res)
   }
+
+  updateAvatar (avatar) {
+    return fetch(`${this._options.baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._options.headers,
+      body: JSON.stringify({
+        avatar
+      })
+    })
+      .then(res => {
+        if(res.ok) {
+          return res.json();
+        }
+        console.log('ошибка');
+      })
+      .then(res => res)
+  }
 }

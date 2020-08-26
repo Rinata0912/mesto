@@ -1,10 +1,20 @@
 export class UserInfo {
-  constructor ({nameSelector, jobSelector}) {
+  constructor({ nameSelector, jobSelector, handleAvatarClick }) {
     this._nameElement = document.querySelector(nameSelector);
     this._jobElement = document.querySelector(jobSelector);
+    this._handleAvatarClick = handleAvatarClick;
+    this._avatarElement = document.querySelector('.profile__avatar-img');
+    this._avatarBtnEdit = document.querySelector('.profile__avatar-edit');
   }
 
-  getUserInfo () {
+  setEventListeners() {
+    this._avatarBtnEdit.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      this._handleAvatarClick();
+    })
+  }
+
+  getUserInfo() {
     const profileInfo = {};
 
     profileInfo.name = this._nameElement.textContent;
@@ -13,13 +23,18 @@ export class UserInfo {
     return profileInfo;
   }
 
-  getUserID () {
+  getUserID() {
     return this._userID;
   }
 
-  setUserInfo (name, job, userID) {
+  setUserInfo(name, job, avatar, userID) {
     this._nameElement.textContent = name;
     this._jobElement.textContent = job;
+    this._avatarElement.src = avatar;
     this._userID = userID;
+  }
+
+  setUpdateAvatar(avatar) {
+    this._avatarElement.src = avatar;
   }
 }
