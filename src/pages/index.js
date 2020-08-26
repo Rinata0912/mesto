@@ -38,9 +38,9 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then((values) => {
   userInfo.setUserInfo(
     apiUserInfo.name,
     apiUserInfo.about,
-    apiUserInfo.avatar,
     apiUserInfo._id
   );
+  userInfo.setUserAvatar(apiUserInfo.avatar);
   const userID = userInfo.getUserID();
 
   const cardList = new Section(
@@ -92,6 +92,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then((values) => {
   );
 
   const popupAddCard = new PopupWithForm(popupAddSelector, (formValues) => {
+    popupAddCard.renderLoading(true);
     api.addCard(formValues.place, formValues.image).then((cardItem) => {
       const card = new Card({
         place: cardItem.name,
@@ -127,6 +128,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then((values) => {
       });
       const cardElement = card.generateCard();
       cardList.addItem(cardElement);
+      popupAddCard.renderLoading(false);
       popupAddCard.close();
     });
   });
@@ -156,9 +158,13 @@ const userInfo = new UserInfo({
 userInfo.setEventListeners();
 
 const popupEditProfile = new PopupWithForm(popupEditSelector, (formValues) => {
-  api
-    .editProfileInfo(formValues.name, formValues.job)
-    .then((profileInfo) => userInfo.setUserInfo(profileInfo.name, profileInfo.about));
+  popupEditProfile.renderLoading(true);
+  api.editProfileInfo(formValues.name, formValues.job)
+    .then((profileInfo) => {
+      userInfo.setUserInfo(profileInfo.name, profileInfo.about);
+      popupEditProfile.renderLoading(false);
+      popupEditProfile.close();
+    });
 });
 
 const editFormValidator = new FormValidator(
@@ -168,7 +174,12 @@ const editFormValidator = new FormValidator(
 
 const popupUpdateAvatar = new PopupWithForm(popupUpdateAvatarSelector,
   (formValue) => {
-    api.updateAvatar(formValue.avatar).then(res => userInfo.setUpdateAvatar(res.avatar));
+    popupUpdateAvatar.renderLoading(true);
+    api.updateAvatar(formValue.avatar).then(res => {
+      userInfo.setUpdateAvatar(res.avatar);
+      popupUpdateAvatar.renderLoading(false);
+      popupUpdateAvatar.close();
+    });
   }
 );
 

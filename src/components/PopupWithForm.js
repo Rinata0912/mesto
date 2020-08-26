@@ -26,7 +26,7 @@ export class PopupWithForm extends Popup{
   _formSubmiter = (evt) => {
     evt.preventDefault();
     this._handleFormSubmit(this._getInputValues());
-    this.close();
+    // this.close();
   }
 
   setEventListeners () {
@@ -42,5 +42,23 @@ export class PopupWithForm extends Popup{
   close () {
     super.close();
     this._formElement.reset();
+  }
+
+  renderLoading (isLoading) {
+    const btnElement = this._formElement.querySelector('.form__submit-btn');
+    if(isLoading) {
+      if(this._formElement.name === 'addCardForm') {
+        btnElement.textContent = 'Создание...';
+      } else {
+        btnElement.textContent = 'Сохранение...';
+      }
+
+    } else {
+      if(this._formElement.name === 'addCardForm') {
+        btnElement.textContent = 'Создать';
+      } else {
+        btnElement.textContent = 'Сохранить';
+      }
+    }
   }
 }
