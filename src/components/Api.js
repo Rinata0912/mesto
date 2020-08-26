@@ -9,6 +9,7 @@ export class Api {
         if(res.ok) {
           return res.json();
         }
+        return Promise.reject(res);
       })
       .then(res => res)
   }
@@ -19,7 +20,7 @@ export class Api {
         if(res.ok) {
           return res.json();
         }
-        console.log('ошибка');
+        return Promise.reject(res);
       })
       .then(res => res)
   }
@@ -37,7 +38,7 @@ export class Api {
         if(res.ok) {
           return res.json();
         }
-        console.log('ошибка');
+        return Promise.reject(res);
       })
       .then(res => res)
   }
@@ -55,7 +56,7 @@ export class Api {
         if(res.ok) {
           return res.json();
         }
-        console.log('ошибка');
+        return Promise.reject(res);
       })
       .then(res => res)
   }
@@ -69,7 +70,7 @@ export class Api {
         if(res.ok) {
           return res.json();
         }
-        console.log('ошибка');
+        return Promise.reject(res);
       })
       .then(res => res)
   }
@@ -83,7 +84,7 @@ export class Api {
         if(res.ok) {
           return res.json();
         }
-        console.log('ошибка');
+        return Promise.reject(res);
       })
       .then(res => res)
   }
@@ -97,7 +98,7 @@ export class Api {
         if(res.ok) {
           return res.json();
         }
-        console.log('ошибка');
+        return Promise.reject(res);
       })
       .then(res => res)
   }
@@ -114,7 +115,7 @@ export class Api {
         if(res.ok) {
           return res.json();
         }
-        console.log('ошибка');
+        return Promise.reject(res);
       })
       .then(res => res)
   }

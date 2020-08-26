@@ -145,7 +145,8 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then((values) => {
     addFormValidator.cleanForm();
     popupAddCard.open();
   });
-});
+})
+  .catch(error => console.log(error))
 
 const userInfo = new UserInfo({
   nameSelector: profileNameSelector,
@@ -164,7 +165,8 @@ const popupEditProfile = new PopupWithForm(popupEditSelector, (formValues) => {
       userInfo.setUserInfo(profileInfo.name, profileInfo.about);
       popupEditProfile.renderLoading(false);
       popupEditProfile.close();
-    });
+    })
+    .catch(error => console.log(error));
 });
 
 const editFormValidator = new FormValidator(
@@ -175,11 +177,13 @@ const editFormValidator = new FormValidator(
 const popupUpdateAvatar = new PopupWithForm(popupUpdateAvatarSelector,
   (formValue) => {
     popupUpdateAvatar.renderLoading(true);
-    api.updateAvatar(formValue.avatar).then(res => {
+    api.updateAvatar(formValue.avatar)
+    .then(res => {
       userInfo.setUpdateAvatar(res.avatar);
       popupUpdateAvatar.renderLoading(false);
       popupUpdateAvatar.close();
-    });
+    })
+    .catch(error => console.log(error));
   }
 );
 
