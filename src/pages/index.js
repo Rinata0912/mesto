@@ -9,6 +9,7 @@ import { FormValidator } from '../components/formValidator.js';
 import { Api } from '../components/Api.js';
 import {
   cardsGallerySelector,
+  cardTemplateSelector,
   popupShowCardSelector,
   profileNameSelector,
   profileJobSelector,
@@ -33,84 +34,41 @@ const api = new Api({
   },
 });
 
-Promise.all([api.getUserInfo(), api.getInitialCards()]).then((values) => {
-  const [apiUserInfo, initCards] = values;
-  userInfo.setUserInfo(
-    apiUserInfo.name,
-    apiUserInfo.about,
-    apiUserInfo._id
-  );
-  userInfo.setUserAvatar(apiUserInfo.avatar);
-  const userID = userInfo.getUserID();
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then((values) => {
+    const [apiUserInfo, initCards] = values;
+    userInfo.setUserInfo(
+      apiUserInfo.name,
+      apiUserInfo.about,
+      apiUserInfo._id
+    );
+    userInfo.setUserAvatar(apiUserInfo.avatar);
+    const userID = userInfo.getUserID();
 
-  const cardList = new Section(
-    {
-      items: initCards.reverse(),
-      renderer: (item) => {
-        const card = new Card({
-          place: item.name,
-          image: item.link,
-          likes: item.likes,
-          isOwn: item.owner._id === userID,
-          id: item._id,
-          isLiked: !!item.likes.find((like) => like._id === userID),
-          handleCardClick: () => {
-            const popupWithImageElement = new PopupWithImage(
-              popupShowCardSelector
-            );
-            popupWithImageElement.open(item.link, item.name);
-          },
-          handleDeleteBtnClick: () => {
-            const popupConfirm = new PopupDeleteCard(
-              popupConfirmSelector,
-              () => {
-                api
-                  .deleteCard(card.getCardID())
-                  .then((res) => card.deleteCard());
-              }
-            );
-            popupConfirm.open();
-          },
-          handleLike: () => {
-            api.likeCard(card.getCardID()).then((res) => {
-              card.updateLikeCounter(res.likes);
-              card.toggleCardButton();
-            });
-          },
-          handleUnlike: () => {
-            return api.unlikeCard(card.getCardID()).then((res) => {
-              card.updateLikeCounter(res.likes);
-              card.toggleCardButton();
-            });
-          },
-        });
-        const cardElement = card.generateCard(userID);
-        cardList.addItem(cardElement);
-      },
-    },
-    cardsGallerySelector
-  );
-
-  const popupAddCard = new PopupWithForm(popupAddSelector, (formValues) => {
-    popupAddCard.renderLoading(true);
-    api.addCard(formValues.place, formValues.image).then((cardItem) => {
+    function createCard(item) {
       const card = new Card({
-        place: cardItem.name,
-        image: cardItem.link,
-        likes: cardItem.likes,
-        isOwn: true,
-        id: cardItem._id,
-        isLiked: false,
+        cardTemplateSelector: cardTemplateSelector,
+        place: item.name,
+        image: item.link,
+        likes: item.likes,
+        isOwn: item.owner._id === userID,
+        id: item._id,
+        isLiked: !!item.likes.find((like) => like._id === userID),
         handleCardClick: () => {
           const popupWithImageElement = new PopupWithImage(
             popupShowCardSelector
           );
-          popupWithImageElement.open(formValues.image, formValues.place);
+          popupWithImageElement.open(item.link, item.name);
         },
         handleDeleteBtnClick: () => {
-          const popupConfirm = new PopupDeleteCard(popupConfirmSelector, () => {
-            api.deleteCard(card.getCardID()).then((res) => card.deleteCard());
-          });
+          const popupConfirm = new PopupDeleteCard(
+            popupConfirmSelector,
+            () => {
+              api
+                .deleteCard(card.getCardID())
+                .then((res) => card.deleteCard());
+            }
+          );
           popupConfirm.open();
         },
         handleLike: () => {
@@ -120,33 +78,49 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then((values) => {
           });
         },
         handleUnlike: () => {
-          api.unlikeCard(card.getCardID()).then((res) => {
+          return api.unlikeCard(card.getCardID()).then((res) => {
             card.updateLikeCounter(res.likes);
             card.toggleCardButton();
           });
         },
       });
-      const cardElement = card.generateCard();
-      cardList.addItem(cardElement);
-      popupAddCard.renderLoading(false);
-      popupAddCard.close();
+      const cardElement = card.generateCard(userID);
+      return cardElement;
+    }
+
+    const cardList = new Section(
+      {
+        items: initCards.reverse(),
+        renderer: (item) => {
+          cardList.addItem(createCard(item));
+        },
+      },
+      cardsGallerySelector
+    );
+
+    const popupAddCard = new PopupWithForm(popupAddSelector, (formValues) => {
+      popupAddCard.renderLoading(true);
+      api.addCard(formValues.place, formValues.image).then((cardItem) => {
+        cardList.addItem(createCard(cardItem));
+        popupAddCard.renderLoading(false);
+        popupAddCard.close();
+      });
     });
-  });
 
-  const addFormValidator = new FormValidator(
-    config,
-    popupAddCard.returnFormElement()
-  );
+    const addFormValidator = new FormValidator(
+      config,
+      popupAddCard.returnFormElement()
+    );
 
-  addFormValidator.enableValidation();
-  cardList.renderElements();
+    addFormValidator.enableValidation();
+    cardList.renderElements();
 
-  profileAddButton.addEventListener('click', () => {
-    addFormValidator.cleanForm();
-    popupAddCard.open();
-  });
-})
-  .catch(error => console.log(error))
+    profileAddButton.addEventListener('click', () => {
+      addFormValidator.cleanForm();
+      popupAddCard.open();
+    });
+  })
+  .catch(error => console.log(error));
 
 const userInfo = new UserInfo({
   nameSelector: profileNameSelector,

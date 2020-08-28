@@ -1,4 +1,5 @@
 const cardsGallerySelector = '.cards-gallery';
+const cardTemplateSelector = '.card-template';
 const popupShowCardSelector = '.js-popup-show-card';
 const profileNameSelector = '.profile__name';
 const profileJobSelector = '.profile__job';
@@ -43,4 +44,4 @@ const initialCards = [
   }
 ];
 
-export { cardsGallerySelector, popupShowCardSelector, profileNameSelector, profileJobSelector, popupAddSelector, popupEditSelector, config, initialCards, popupConfirmSelector, popupUpdateAvatarSelector };
+export { cardsGallerySelector, cardTemplateSelector, popupShowCardSelector, profileNameSelector, profileJobSelector, popupAddSelector, popupEditSelector, config, initialCards, popupConfirmSelector, popupUpdateAvatarSelector };

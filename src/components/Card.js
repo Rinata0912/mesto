@@ -1,5 +1,6 @@
 class Card {
-  constructor ({place, image, likes, isOwn, isLiked, id, handleCardClick, handleDeleteBtnClick, handleLike, handleUnlike}) {
+  constructor ({cardTemplateSelector, place, image, likes, isOwn, isLiked, id, handleCardClick, handleDeleteBtnClick, handleLike, handleUnlike}) {
+    this._cardTemplate = document.querySelector(cardTemplateSelector).content;
     this._place = place;
     this._image = image;
     this._likes = likes;
@@ -17,7 +18,7 @@ class Card {
   }
 
   _getCardTemplate() {
-    const cardElement = document.querySelector('.card-template').content.querySelector('.card').cloneNode(true);
+    const cardElement = this._cardTemplate.querySelector('.card').cloneNode(true);
     return cardElement;
   }
 
