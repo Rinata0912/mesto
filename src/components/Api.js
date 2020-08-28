@@ -3,25 +3,22 @@ export class Api {
     this._options = options;
   }
 
+  _handleOriginalRes = (res) => {
+    if(res.ok) {
+      return res.json();
+    }
+    return Promise.reject(res);
+  }
+
   getInitialCards () {
     return fetch(`${this._options.baseUrl}/cards`, {headers: this._options.headers})
-      .then(res => {
-        if(res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res);
-      })
+      .then(this._handleOriginalRes)
       .then(res => res)
   }
 
   getUserInfo () {
     return fetch(`${this._options.baseUrl}/users/me`, {headers: this._options.headers})
-      .then(res => {
-        if(res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res);
-      })
+      .then(this._handleOriginalRes)
       .then(res => res)
   }
 
@@ -34,12 +31,7 @@ export class Api {
         about
       })
     })
-      .then(res => {
-        if(res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res);
-      })
+      .then(this._handleOriginalRes)
       .then(res => res)
   }
 
@@ -52,12 +44,7 @@ export class Api {
         link
       })
     })
-      .then(res => {
-        if(res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res);
-      })
+      .then(this._handleOriginalRes)
       .then(res => res)
   }
 
@@ -66,12 +53,7 @@ export class Api {
       method: 'DELETE',
       headers: this._options.headers
     })
-      .then(res => {
-        if(res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res);
-      })
+      .then(this._handleOriginalRes)
       .then(res => res)
   }
 
@@ -80,12 +62,7 @@ export class Api {
       method: 'PUT',
       headers: this._options.headers
     })
-      .then(res => {
-        if(res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res);
-      })
+      .then(this._handleOriginalRes)
       .then(res => res)
   }
 
@@ -94,12 +71,7 @@ export class Api {
       method: 'DELETE',
       headers: this._options.headers
     })
-      .then(res => {
-        if(res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res);
-      })
+      .then(this._handleOriginalRes)
       .then(res => res)
   }
 
@@ -111,12 +83,7 @@ export class Api {
         avatar
       })
     })
-      .then(res => {
-        if(res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res);
-      })
+      .then(this._handleOriginalRes)
       .then(res => res)
   }
 }
