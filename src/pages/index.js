@@ -3,7 +3,6 @@ import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
-import { PopupDeleteCard } from '../components/PopupDeleteCard.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { FormValidator } from '../components/formValidator.js';
 import { Api } from '../components/Api.js';
@@ -61,12 +60,17 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
           popupWithImageElement.open(item.link, item.name);
         },
         handleDeleteBtnClick: () => {
-          const popupConfirm = new PopupDeleteCard(
+          // Заменила на PopupWithForm, a PopupDeleteCard удалила
+          const popupConfirm = new PopupWithForm(
             popupConfirmSelector,
             () => {
-              api
-                .deleteCard(card.getCardID())
-                .then((res) => card.deleteCard());
+              popupConfirm.renderLoading(true);
+              api.deleteCard(card.getCardID())
+                .then(() => {
+                card.deleteCard();
+                popupConfirm.renderLoading(false);
+                popupConfirm.close();
+              });
             }
           );
           popupConfirm.open();

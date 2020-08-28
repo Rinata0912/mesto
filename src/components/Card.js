@@ -52,7 +52,6 @@ class Card {
       evt.preventDefault();
       this._handleDeleteBtnClick();
     });
-    // this._element.querySelector('.card__btn').addEventListener('click', this._toggleCardButton);
     this._element.querySelector('.card__btn').addEventListener('click', this._handleClickLike);
 
     this._element.querySelector('.card__show-image').addEventListener('click', (evt) => {
