@@ -4,7 +4,7 @@
   "description": "## Описание проекта. Проектная работа № 7 от [Яндекс.Практикум](https://praktikum.yandex.ru/) - это сервис для публикации мест из разных уголков Земли. В этой версии реализован функционал для добавления и редактирования данных в профиле, добавление мест, просмотр изображений в полном размере и валидация форм. [**Ссылка на проект**](https://rinata0912.github.io/mesto/index.html) #### Используемые технологии: * БЭМ-методология (Nested) * CSS3 * HTML5 * Flexbox * Grid Layout * Normalize.css * JavaScript * JavaScript modules ## Инструкция по использованию проекта и системные требования: **Язык проекта:** RU **Поддержка браузеров:** Chrome, Safari, Firefox, Opera.",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf dist && webpack",
+    "build": "rimraf dist && webpack",
     "dev": "webpack-dev-server --open --watch"
   },
   "repository": {
@@ -35,6 +35,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "core-js": "^3.6.5"
+    "core-js": "^3.6.5",
+    "rimraf": "^3.0.2"
   }
 }
